@@ -14,7 +14,6 @@ def get_subreddit_undone(submissions: list, subreddit):
         Any: The submission that has not been done
     """
     # recursively checks if the top submission in the list was already done.
-
     with open("./video_creation/data/videos.json", "r", encoding="utf-8") as done_vids_raw:
         done_videos = json.load(done_vids_raw)
     for submission in submissions:
@@ -29,6 +28,8 @@ def get_subreddit_undone(submissions: list, subreddit):
                 print_substep("NSFW settings not defined. Skipping NSFW post...")
         if submission.stickied:
             print_substep("This post was pinned by moderators. Skipping...")
+            continue
+        if submission.score < 2000:
             continue
         return submission
     print("all submissions have been done going by top submission order")

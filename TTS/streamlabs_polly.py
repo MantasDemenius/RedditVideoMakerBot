@@ -35,7 +35,7 @@ class StreamlabsPolly:
         if random_voice:
             voice = self.randomvoice()
         else:
-            if not os.getenv("VOICE"):
+            if not os.getenv("STREAMLABS_VOICE"):
                 return ValueError(
                     f"Please set the environment variable VOICE to a valid voice. options are: {voices}"
                 )

@@ -64,8 +64,7 @@ def get_subreddit_threads(POST_ID: str):
     elif getenv("POST_ID") and len(getenv("POST_ID").split("+")) == 1:
         submission = reddit.submission(id=getenv("POST_ID"))
     else:
-
-        threads = subreddit.hot(limit=25)
+        threads = subreddit.hot(limit=50)
         submission = get_subreddit_undone(threads, subreddit)
     submission = check_done(submission)  # double-checking
     if submission is None:
@@ -74,7 +73,7 @@ def get_subreddit_threads(POST_ID: str):
     ratio = submission.upvote_ratio * 100
     num_comments = submission.num_comments
 
-    print_substep(f"Video will be: {submission.title} :thumbsup:", style="bold green")
+    print_substep(f"Video will be: {submission.title} {submission.id} :thumbsup:", style="bold green")
     print_substep(f"Thread has {upvotes} upvotes", style="bold blue")
     print_substep(f"Thread has a upvote ratio of {ratio}%", style="bold blue")
     print_substep(f"Thread has {num_comments} comments", style="bold blue")
